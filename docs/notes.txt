@@ -1,0 +1,76 @@
+### Products #################
+- Company:string
+- website:string
+- upc:integer
+- name:string       
+- price:float
+- description:text  
+
+### Customer ################
+- name:string
+- last_name:string
+- email:string
+- contact_phone:string
+- street:string
+- city:string
+- state:string
+- zip:integer
+
+### Category ################
+- name:string        
+- description:text 
+
+
+#### FAKER METHODS #####
+
+  # CUSTOMERS #
+  30.times do |i|
+    customer = Customer.create({
+      customer.name    = Faker::Name.name,
+      customer.company = Faker::Company.name,
+      customer.email   = Faker::Internet.email,
+      customer.phone   = Faker::PhoneNumber.phone_number,
+      customer.street  = Faker::AddressUS.street_address,
+      customer.city    = Faker::AddressUS.city,
+      customer.state   = Faker::AddressUS.state,
+      customer.zip     = Faker::AddressUS.zip_code,
+    })
+  end
+
+  # PRODUCTS #
+  200.times do |i|
+    product = Product.create({
+      product.name        = Faker::BaconIpsum.words.join(' '),
+      product.description = Faker::BaconIpsum.paragraph,
+      product.company     = Faker::Company.name,
+      product.upc_code    = Faker::Identification.drivers_license,
+      product.price       = rand(5..278)
+      product.website     = Faker::Internet.uri('http'),    
+    })
+  end
+
+  # CATEGORIES #
+  18.times do |i|
+    category = Category.create({
+      category.name   = Faker::BackonIpsom.words.join(' '),
+      category.description = Faker::BaconIpsum.paragraph,
+    })
+  end
+  
+########### OOO ####################
+
+1. rails new store
+2. cd store
+3. rails g scaffold product name:string price:float company:string upc_code:integer website:string description:text --skip-stylesheets
+4. rails g scaffold customer name:string company:string email:string contact_phone:string street:string city:string state:string zip:integer --skip-stylesheets
+5. rails g scaffold category name:string description:text --skip-stylesheets
+6. rake db:create
+7. rake db:migrate
+8. rails generate bootstrap:install less
+9. rails g bootstrap:themed products -f
+10. update application.html.erb layout and give id to container
+11. add #main {margin-top: 50px;}
+12. rails g controller StaticPages home about --no-text-framework
+13. rails g kaminari:config
+14. add markup and settings for kaminari on Products and Customers
+15. fix styling on customers
