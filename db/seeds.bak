@@ -1,0 +1,16 @@
+require "ffaker"
+
+def set_up_development_database
+  200.times do |i|
+    products = Product.create(
+    {
+      name:        Faker::BaconIpsum.words.join(' '),
+      description: Faker::BaconIpsum.paragraph,
+      company:     Faker::Company.name,
+      upc_code:    Faker::Identification.drivers_license,
+      price:       rand(5..278),
+      website:     Faker::Internet.uri('http'),    
+    }
+    )
+  end
+end
